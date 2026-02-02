@@ -8,6 +8,7 @@ function Hello() {
   // izmantojam State, glabāt aplikācijas stāvokli (informāciju)
   // const [mainīgā nosaukums, funkcija lai mainītu vērtību] = useState(noklusējuma vērtība)
   const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
 
   // izpildās vienu reizi, kad komponente ielādējas
   useEffect(() => {
@@ -32,6 +33,8 @@ function Hello() {
     <div className={containerStyle}>
       <div className={formStyle}>
         <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           className={inputStyle}
           type="text"
           placeholder="Type a name..."
