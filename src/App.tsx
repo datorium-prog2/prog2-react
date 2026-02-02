@@ -20,6 +20,8 @@ function Hello() {
     fetchData();
   }, []); // tukšs saraksts => izpildīt tikai vienu reizi
 
+  // TODO: sataisīt smukākus stilus
+
   const containerStyle = "max-w-3xl mx-auto px-6 py-6";
   const formStyle = "flex flex-col sm:flex-row items-center gap-3";
   const inputStyle =
@@ -29,6 +31,8 @@ function Hello() {
   const pStyle =
     "text-base sm:text-lg md:text-xl text-gray-800 dark:text-gray-100 leading-relaxed max-w-prose mx-auto px-6 py-3 rounded-lg bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 shadow-sm";
 
+  // TODO: nospiežot pogu Greet me! - tiek aizsūtīts POST request uz API
+  // TODO: tiek atjaunots message uz to, ko saņemt no POST response
   return (
     <div className={containerStyle}>
       <div className={formStyle}>
