@@ -10,10 +10,20 @@ interface LoginFormProps {
 export function LoginForm({ onLogin }: LoginFormProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = async () => {
-    const response = await getAuthToken({ username, password });
-    onLogin(response.data.token);
+    try {
+      setError("");
+      const response = await getAuthToken({ username, password });
+      onLogin(response.data.token);
+    } catch (err: any) {
+      if (err.response?.data) {
+        setError(err.response?.data);
+      } else {
+        setError("Something went wrong :(");
+      }
+    }
   };
 
   return (
@@ -38,6 +48,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
       >
         Login
       </button>
+      {error && <p className="text-red-500">{error}</p>}
     </div>
   );
 }
