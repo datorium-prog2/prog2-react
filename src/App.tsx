@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import { HelloForm } from "./features/greeting/HelloForm";
-
+import { LoginForm } from "./features/auth/LoginForms";
 
 // Funkcijas ir komponents
 // Komponented atgriež JSX (JavaScript XML) - HTML līdzīgu sintaksi JavaScript iekšā
@@ -15,6 +15,7 @@ function App() {
     <div>
       <h1 className={headerStyle}>Prog2Social</h1>
       <HelloForm />
+      <LoginForm />
     </div>
   );
 }
