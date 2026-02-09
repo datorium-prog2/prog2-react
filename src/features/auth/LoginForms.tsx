@@ -1,8 +1,20 @@
 import { useState } from "react";
+import { getAuthToken } from "./api";
 
-export function LoginForm() {
+interface LoginFormProps {
+  // onLogin ir funkcija, kas ņemt kā argumentu vienu string, un atgriež neko
+  onLogin: (token: string) => void;
+}
+
+// kā arguments šai komponentei būš funkcija, kas var nomainīt token (setToken)
+export function LoginForm({ onLogin }: LoginFormProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    const response = await getAuthToken({ username, password });
+    onLogin(response.data.token);
+  };
 
   return (
     <div className="p-4 flex flex-col gap-2 max-w-sm">
@@ -20,7 +32,10 @@ export function LoginForm() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+        onClick={handleLogin}
+      >
         Login
       </button>
     </div>
