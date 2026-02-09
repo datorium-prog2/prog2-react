@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getHello } from "./api";
+import { getHello, postHello } from "./api";
 
 export function HelloForm() {
   // izmantojam State, glabāt aplikācijas stāvokli (informāciju)
@@ -16,6 +16,15 @@ export function HelloForm() {
 
     fetchData();
   }, []); // tukšs saraksts => izpildīt tikai vienu reizi
+
+  // definējam funkciju
+  // izsauc HELLO POST endpointu
+  // saglabā rezultātu iekšā mainīgajā message
+  const handleHello = async () => {
+    const request = { name: name };
+    const response = await postHello(request);
+    setMessage(response.data);
+  };
 
   const inputStyle =
     "border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500";
@@ -34,7 +43,9 @@ export function HelloForm() {
         type="text"
         placeholder="Type a name..."
       />
-      <button className={buttonStyle}>Greet me!</button>
+      <button className={buttonStyle} onClick={handleHello}>
+        Greet me!
+      </button>
       <p className={textStyle}>{message}</p>
     </div>
   );
