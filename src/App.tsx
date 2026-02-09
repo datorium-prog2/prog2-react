@@ -15,12 +15,21 @@ function App() {
   let headerStyle =
     "text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent py-6";
 
+  // ja tokens eksistē (ja esam ielogojušies)
+  if (token) {
+    return (
+      <div>
+        <h1 className={headerStyle}>Prog2Social</h1>
+        <HelloForm />
+      </div>
+    );
+  }
+
+  // citādāk
   return (
     <div>
       <h1 className={headerStyle}>Prog2Social</h1>
-      <HelloForm />
       <LoginForm onLogin={setToken} />
-      {token}
     </div>
   );
 }
