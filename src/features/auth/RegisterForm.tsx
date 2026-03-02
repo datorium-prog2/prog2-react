@@ -6,9 +6,11 @@ export function RegisterForm() {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleRegister = async () => {
     setError("");
+    setMessage("");
     validateInputs();
 
     // UN-HAPPY PATH
@@ -19,6 +21,7 @@ export function RegisterForm() {
     // HAPPY PATH
     try {
       await registerUser({ username, password });
+      setMessage("User registered successfully!");
     } catch (err: any) {
       if (err.reponse?.data) {
         setError(err.response?.data);
@@ -77,6 +80,7 @@ export function RegisterForm() {
       </button>
       {/* ja ir error, rādīt error */}
       {error && <p className="text-red-500">{error}</p>}
+      {message && <p className="text-black">{message}</p>}
     </div>
   );
 }
