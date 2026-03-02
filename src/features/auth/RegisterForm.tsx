@@ -8,12 +8,12 @@ export function RegisterForm() {
         className="border-2 rounded-lg px-4 py-2"
       />
       <input
-        type="text"
+        type="password"
         placeholder="Password"
         className="border-2 rounded-lg px-4 py-2"
       />
       <input
-        type="text"
+        type="password"
         placeholder="Repeat password"
         className="border-2 rounded-lg px-4 py-2"
       />
