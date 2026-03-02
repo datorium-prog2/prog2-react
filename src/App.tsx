@@ -11,6 +11,8 @@ import { useState } from "react";
 function App() {
   // token var būt vai nu string, vai nu null
   const [token, setToken] = useState<string | null>(null);
+  // glabājam esošu lapu state'ā
+  const [page, setPage] = useState<"login" | "register">("login");
 
   // Tailwind klases - uzliek konkrētus CSS komponentei.
   let headerStyle =
@@ -21,20 +23,28 @@ function App() {
     return (
       <div>
         <h1 className={headerStyle}>Prog2Social</h1>
-        <RegisterForm></RegisterForm>
         <HelloForm />
       </div>
     );
   }
 
-  // citādāk
-  return (
-    <div>
-      <h1 className={headerStyle}>Prog2Social</h1>
-      <RegisterForm></RegisterForm>
-      <LoginForm onLogin={setToken} />
-    </div>
-  );
+  if (page === "login") {
+    return (
+      <div>
+        <h1 className={headerStyle}>Prog2Social</h1>
+        <LoginForm onLogin={setToken} />
+      </div>
+    );
+  }
+
+  if (page === "register") {
+    return (
+      <div>
+        <h1 className={headerStyle}>Prog2Social</h1>
+        <RegisterForm />
+      </div>
+    );
+  }
 }
 
 export default App;
