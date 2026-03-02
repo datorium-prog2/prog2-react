@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { registerUser } from "./api";
 
 export function RegisterForm() {
   const [username, setUsername] = useState("");
@@ -10,8 +11,22 @@ export function RegisterForm() {
     setError("");
     validateInputs();
 
-    if (!error) {
-      // Reģistrēsim lietotāju ar API
+    // UN-HAPPY PATH
+    if (error) {
+      return; // early return
+    }
+
+    // HAPPY PATH
+    try {
+      await registerUser({ username, password });
+    } catch (err: any) {
+      if (err.reponse?.data) {
+        setError(err.response?.data);
+      } else if (err.response?.status == 409) {
+        setError("Username is already taken!");
+      } else {
+        setError("Something went wrong. Please try again!");
+      }
     }
   };
 

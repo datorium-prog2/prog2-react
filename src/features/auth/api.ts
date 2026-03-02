@@ -5,3 +5,6 @@ const BASE_URL = "https://prog2-webapi-teaching-demo.onrender.com";
 
 export const getAuthToken = (request: UserRequest) =>
   axios.post<{ token: string }>(`${BASE_URL}/login`, request);
+
+export const registerUser = (request: UserRequest) =>
+  axios.post<{ id: number }>(`${BASE_URL}/register`, request);
