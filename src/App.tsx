@@ -2,7 +2,8 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import { HelloForm } from "./features/greeting/HelloForm";
-import { LoginForm } from "./features/auth/LoginForms";
+import { LoginForm } from "./features/auth/LoginForm";
+import { RegisterForm } from "./features/auth/RegisterForm";
 import { useState } from "react";
 
 // Funkcijas ir komponents
@@ -20,6 +21,7 @@ function App() {
     return (
       <div>
         <h1 className={headerStyle}>Prog2Social</h1>
+        <RegisterForm></RegisterForm>
         <HelloForm />
       </div>
     );
@@ -29,6 +31,7 @@ function App() {
   return (
     <div>
       <h1 className={headerStyle}>Prog2Social</h1>
+      <RegisterForm></RegisterForm>
       <LoginForm onLogin={setToken} />
     </div>
   );
