@@ -4,11 +4,29 @@ export function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleRegister = async () => {
-    console.log("KĀDS NOSPIEDA POGU???");
+    setError("");
+    validateInputs();
+
+    if (!error) {
+      // Reģistrēsim lietotāju ar API
+    }
+  };
+
+  const validateInputs = () => {
+    if (!username) {
+      setError("Username ir required!");
+      return;
+    }
+    if (!password) {
+      setError("Password is required!");
+      return;
+    }
     if (password !== repeatPassword) {
-      console.log("Paroles nav vienādas!");
+      setError("Passwords must match!");
+      return;
     }
   };
 
@@ -42,6 +60,8 @@ export function RegisterForm() {
       >
         Register
       </button>
+      {/* ja ir error, rādīt error */}
+      {error && <p className="text-red-500">{error}</p>}
     </div>
   );
 }
