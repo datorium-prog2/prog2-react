@@ -33,18 +33,34 @@ function App() {
       <div>
         <h1 className={headerStyle}>Prog2Social</h1>
         <LoginForm onLogin={setToken} />
+        <p className="p-4">
+          Don't have an account?{" "}
+          <button
+            onClick={() => setPage("register")}
+            className="text-blue-500 underline"
+          >
+            Register
+          </button>
+        </p>
       </div>
     );
   }
 
-  if (page === "register") {
-    return (
-      <div>
-        <h1 className={headerStyle}>Prog2Social</h1>
-        <RegisterForm />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1 className={headerStyle}>Prog2Social</h1>
+      <RegisterForm />
+      <p className="p-4">
+        Already have an account?{" "}
+        <button
+          onClick={() => setPage("login")}
+          className="text-blue-500 underline"
+        >
+          Login
+        </button>
+      </p>
+    </div>
+  );
 }
 
 export default App;
