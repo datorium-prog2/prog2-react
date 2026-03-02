@@ -1,18 +1,30 @@
+import { useState } from "react";
+
 export function RegisterForm() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+
   // Atgriež JSX -> Javascript ar HTML
   return (
     <div className="p-4 flex flex-col gap-2 max-w-sm">
       <input
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
         type="text"
         placeholder="Username"
         className="border-2 rounded-lg px-4 py-2"
       />
       <input
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         type="password"
         placeholder="Password"
         className="border-2 rounded-lg px-4 py-2"
       />
       <input
+        value={repeatPassword}
+        onChange={(e) => setRepeatPassword(e.target.value)}
         type="password"
         placeholder="Repeat password"
         className="border-2 rounded-lg px-4 py-2"
