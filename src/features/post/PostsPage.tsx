@@ -1,10 +1,14 @@
 import { PostsForm } from "./PostsForm";
 
-export function PostsPage() {
+interface PostsPageProps {
+  token: string;
+}
+
+export function PostsPage({ token }: PostsPageProps) {
   return (
     <div>
       <h1>Posts</h1>
-      <PostsForm />
+      <PostsForm token={token} />
     </div>
   );
 }

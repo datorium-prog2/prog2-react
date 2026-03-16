@@ -25,7 +25,7 @@ function App() {
       <div>
         <h1 className={headerStyle}>Prog2Social</h1>
         <HelloForm />
-        <PostsPage />
+        <PostsPage token={token} />
       </div>
     );
   }
