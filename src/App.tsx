@@ -5,7 +5,7 @@ import { HelloForm } from "./features/greeting/HelloForm";
 import { LoginForm } from "./features/auth/LoginForm";
 import { RegisterForm } from "./features/auth/RegisterForm";
 import { useState } from "react";
-import { PostPage } from "./features/post/PostsPage";
+import { PostsPage } from "./features/post/PostsPage";
 
 // Funkcijas ir komponents
 // Komponented atgriež JSX (JavaScript XML) - HTML līdzīgu sintaksi JavaScript iekšā
@@ -25,7 +25,7 @@ function App() {
       <div>
         <h1 className={headerStyle}>Prog2Social</h1>
         <HelloForm />
-        <PostPage />
+        <PostsPage />
       </div>
     );
   }
