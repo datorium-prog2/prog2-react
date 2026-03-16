@@ -2,24 +2,17 @@ import { useState } from "react";
 import { createPost } from "./api";
 
 interface PostsFormProps {
-  token: string;
+  onSubmit: (title: string, content: string) => void;
 }
 
-export function PostsForm({ token }: PostsFormProps) {
+export function PostsForm({ onSubmit }: PostsFormProps) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [error, setError] = useState("");
 
-  // funkcija, kas tiek izsaukta, kad spiežam pogu Post
-  const handleCreate = async () => {
-    try {
-      setError("");
-      await createPost({ title, content }, token);
-      setTitle("");
-      setContent("");
-    } catch {
-      setError("Failed to create post.");
-    }
+  const handleClick = async () => {
+    onSubmit(title, content);
+    setTitle("");
+    setContent("");
   };
 
   return (
@@ -40,11 +33,10 @@ export function PostsForm({ token }: PostsFormProps) {
       ></textarea>
       <button
         className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-        onClick={handleCreate}
+        onClick={handleClick}
       >
         Post!
       </button>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
     </div>
   );
 }
