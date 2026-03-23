@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PostsForm } from "./PostsForm";
-import { createPost } from "./api";
+import { createPost, getPosts } from "./api";
+import { Post } from "./types";
 
 interface PostsPageProps {
   token: string;
@@ -8,6 +9,7 @@ interface PostsPageProps {
 
 export function PostsPage({ token }: PostsPageProps) {
   const [error, setError] = useState("");
+  const [posts, setPosts] = useState<Post[]>([]);
 
   const handleCreate = async (title: string, content: string) => {
     try {
@@ -15,6 +17,17 @@ export function PostsPage({ token }: PostsPageProps) {
       await createPost({ title, content }, token);
     } catch {
       setError("Failed to create post.");
+    }
+  };
+
+  const loadPosts = async () => {
+    try {
+      setError("");
+      let response = await getPosts(token);
+      // parāda postus reverse chronological order (jaunāki posti būs augšā)
+      setPosts(response.data.slice().reverse());
+    } catch {
+      setError("Failed to load posts.");
     }
   };
 
