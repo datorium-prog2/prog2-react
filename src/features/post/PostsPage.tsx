@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PostsForm } from "./PostsForm";
 import { createPost, getPosts } from "./api";
 import { Post } from "./types";
@@ -15,6 +15,7 @@ export function PostsPage({ token }: PostsPageProps) {
     try {
       setError("");
       await createPost({ title, content }, token);
+      await loadPosts();
     } catch {
       setError("Failed to create post.");
     }
@@ -31,11 +32,23 @@ export function PostsPage({ token }: PostsPageProps) {
     }
   };
 
+  useEffect(() => {
+    loadPosts();
+  }, []); // [] - izpildīsies vienu reizi, katru reizi, kad komponente ielādējas
+
   return (
     <div className="p-4 flex flex-col gap-2 max-w-sm">
       <h1 className="text-2xl font-bold">Posts</h1>
       <PostsForm onSubmit={handleCreate} />
       {error && <p className="text-red-500 mb-4">{error}</p>}
+      <div>
+        {
+          // Katram postam izveidot JSX kodu (HTML) (map ir līdzīgs for/foreach loopam)
+          posts.map((post: Post) => (
+            <h1>{post.title}</h1>
+          ))
+        }
+      </div>
     </div>
   );
 }
