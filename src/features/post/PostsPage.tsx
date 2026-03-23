@@ -7,6 +7,12 @@ interface PostsPageProps {
   token: string;
 }
 
+const formatDate = (value: string) =>
+  new Date(value).toLocaleString(undefined, {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+
 export function PostsPage({ token }: PostsPageProps) {
   const [error, setError] = useState("");
   const [posts, setPosts] = useState<Post[]>([]);
@@ -62,7 +68,7 @@ export function PostsPage({ token }: PostsPageProps) {
               <div className="flex flex-col gap-1">
                 <h2 className="text-xl font-semibold">{post.title}</h2>
                 <p className="text-sm text-gray-600">
-                  By {post.author.username} on {post.createdAt}
+                  By {post.author.username} on {formatDate(post.createdAt)}
                 </p>
               </div>
               <p>{post.content}</p>
