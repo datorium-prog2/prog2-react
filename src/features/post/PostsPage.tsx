@@ -45,7 +45,18 @@ export function PostsPage({ token }: PostsPageProps) {
         {
           // Katram postam izveidot JSX kodu (HTML) (map ir līdzīgs for/foreach loopam)
           posts.map((post: Post) => (
-            <h1>{post.title}</h1>
+            <article
+              key={post.id}
+              className="border-2 rounded-lg p-4 flex flex-col gap-3"
+            >
+              <div className="flex flex-col gap-1">
+                <h2 className="text-xl font-semibold">{post.title}</h2>
+                <p className="text-sm text-gray-600">
+                  By {post.author.username} on {post.createdAt}
+                </p>
+              </div>
+              <p>{post.content}</p>
+            </article>
           ))
         }
       </div>
