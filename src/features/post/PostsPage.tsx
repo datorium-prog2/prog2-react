@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { PostsForm } from "./PostsForm";
-import { createPost, getPosts } from "./api";
+import { createPost, getPosts, likePost } from "./api";
 import { Post } from "./types";
 
 interface PostsPageProps {
@@ -32,6 +32,16 @@ export function PostsPage({ token }: PostsPageProps) {
     }
   };
 
+  const handleLike = async (postId: number) => {
+    try {
+      setError("");
+      await likePost(postId, token);
+      await loadPosts();
+    } catch {
+      setError("Failed to like post.");
+    }
+  };
+
   useEffect(() => {
     loadPosts();
   }, []); // [] - izpildīsies vienu reizi, katru reizi, kad komponente ielādējas
@@ -56,6 +66,15 @@ export function PostsPage({ token }: PostsPageProps) {
                 </p>
               </div>
               <p>{post.content}</p>
+
+              <div className="flex items-center gap-3">
+                <button
+                  className="py-2 rounded-lg"
+                  onClick={() => handleLike(post.id)}
+                >
+                  ❤️ {post.likeCount}
+                </button>
+              </div>
             </article>
           ))
         }
