@@ -7,6 +7,10 @@ export interface CreatePostRequest {
   content: string;
 }
 
+export interface CreateCommentRequest {
+  content: string;
+}
+
 export interface Author {
   id: number;
   username: string;
@@ -19,6 +23,7 @@ export interface Post {
   createdAt: string;
   author: Author;
   likeCount: number;
+  comments: Comment[];
 }
 
 export interface Comment {
