@@ -115,17 +115,45 @@ export function PostsPage({ token }: PostsPageProps) {
                 </button>
               </div>
 
-              <div className="flex flex-col gap-2 sm:flex-row">
-                <input
-                  type="text"
-                  value={commentInputs[post.id] ?? ""}
-                  onChange={(e) => handleCommentChange(post.id, e.target.value)}
-                  placeholder="Write a comment..."
-                  className="border-2 rounded-lg px-4 py-2 flex-1"
-                ></input>
-                <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg">
-                  Comment
-                </button>
+              <div className="flex flex-col gap-2">
+                <h3 className="">Comments ({post.comments.length})</h3>
+
+                {post.comments.length === 0 ? (
+                  <p className="text-sm text-gray-600">No comments yet.</p>
+                ) : (
+                  <div className="flex flex-col gap-2">
+                    {post.comments.map((comment) => (
+                      <div
+                        key={comment.id}
+                        className="bg-gray-50 border rounded-lg px-3 py-2"
+                      >
+                        <p>{comment.content}</p>
+                        <p className="text-sm text-gray-600 mt-1">
+                          {comment.author.username}{" "}
+                          {formatDate(comment.createdAt)}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div className="flex flex-col gap-2 sm:flex-row">
+                  <input
+                    type="text"
+                    value={commentInputs[post.id] ?? ""}
+                    onChange={(e) =>
+                      handleCommentChange(post.id, e.target.value)
+                    }
+                    placeholder="Write a comment..."
+                    className="border-2 rounded-lg px-4 py-2 flex-1"
+                  ></input>
+                  <button
+                    className="bg-cyan-500 text-white px-4 py-2 rounded-lg"
+                    onClick={() => handleComment(post.id)}
+                  >
+                    Comment
+                  </button>
+                </div>
               </div>
             </article>
           ))
