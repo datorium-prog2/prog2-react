@@ -16,6 +16,9 @@ const formatDate = (value: string) =>
 export function PostsPage({ token }: PostsPageProps) {
   const [error, setError] = useState("");
   const [posts, setPosts] = useState<Post[]>([]);
+  const [commentInputs, setCommentInputs] = useState<Record<number, string>>(
+    {},
+  );
 
   const handleCreate = async (title: string, content: string) => {
     try {
@@ -46,6 +49,14 @@ export function PostsPage({ token }: PostsPageProps) {
     } catch {
       setError("Failed to like post.");
     }
+  };
+
+  // šis vienkārši pievieno jaunu Record<string, number>
+  const handleCommentChange = (postId: number, value: string) => {
+    setCommentInputs((current) => ({
+      ...current,
+      [postId]: value,
+    }));
   };
 
   useEffect(() => {
@@ -85,6 +96,8 @@ export function PostsPage({ token }: PostsPageProps) {
               <div className="flex flex-col gap-2 sm:flex-row">
                 <input
                   type="text"
+                  value={commentInputs[post.id] ?? ""}
+                  onChange={(e) => handleCommentChange(post.id, e.target.value)}
                   placeholder="Write a comment..."
                   className="border-2 rounded-lg px-4 py-2 flex-1"
                 ></input>
