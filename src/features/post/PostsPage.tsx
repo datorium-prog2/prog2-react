@@ -53,7 +53,7 @@ export function PostsPage({ token }: PostsPageProps) {
   }, []); // [] - izpildīsies vienu reizi, katru reizi, kad komponente ielādējas
 
   return (
-    <div className="p-4 flex flex-col gap-2 max-w-sm">
+    <div className="p-4 flex flex-col gap-2 max-w-xl">
       <h1 className="text-2xl font-bold">Posts</h1>
       <PostsForm onSubmit={handleCreate} />
       {error && <p className="text-red-500 mb-4">{error}</p>}
