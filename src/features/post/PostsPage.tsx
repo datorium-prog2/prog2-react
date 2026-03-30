@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { PostsForm } from "./PostsForm";
-import { createPost, getPosts, likePost } from "./api";
+import { createPost, getPosts, likePost, createComment } from "./api";
 import { Post } from "./types";
 
 interface PostsPageProps {
@@ -27,6 +27,28 @@ export function PostsPage({ token }: PostsPageProps) {
       await loadPosts();
     } catch {
       setError("Failed to create post.");
+    }
+  };
+
+  const handleComment = async (postId: number) => {
+    const content = commentInputs[postId]?.trim();
+
+    // ja nav komentāra satura, beignt funckijas izpildi
+    if (!content) {
+      return;
+    }
+
+    try {
+      setError("");
+      await createComment(postId, { content }, token);
+      // notīram komentāra lauku
+      setCommentInputs((current) => ({
+        ...current,
+        [postId]: "",
+      }));
+      await loadPosts();
+    } catch {
+      setError("Failed to add comment.");
     }
   };
 
